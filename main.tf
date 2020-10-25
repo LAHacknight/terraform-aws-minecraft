@@ -174,7 +174,7 @@ module "ec2_security_group" {
   description = "Allow SSH and TCP ${var.mc_port}"
   vpc_id      = local.vpc_id
 
-  ingress_cidr_blocks      = [ var.allowed_cidrs ]
+  ingress_cidr_blocks      = var.allowed_cidrs
   ingress_rules            = [ "ssh-tcp"]
   ingress_with_cidr_blocks = [
     {
@@ -182,7 +182,7 @@ module "ec2_security_group" {
       to_port     = var.mc_port
       protocol    = "tcp"
       description = "Minecraft server"
-      cidr_blocks = var.allowed_cidrs
+      cidr_blocks = join(",", var.allowed_cidrs)
     },
   ]
   egress_rules = ["all-all"]
