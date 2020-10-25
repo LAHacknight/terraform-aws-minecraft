@@ -131,6 +131,8 @@ download_minecraft_server() {
   # Find latest version number if user wants that version (the default)
   if [[ "${mc_version}" == "latest" ]]; then
     MC_VERS=$(jq -r '.["latest"]["'"${mc_type}"'"]' ${mc_root}/version_manifest.json)
+  else
+    MC_VERS=${mc_version}
   fi
 
   # Index version_manifest.json by the version number and extract URL for the specific version manifest
